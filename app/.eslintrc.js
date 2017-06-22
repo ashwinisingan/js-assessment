@@ -3,9 +3,12 @@ module.exports = {
         "browser": true,
         "node": true
     },
+
     "globals": {
       "exports": false,
     },
+
+
     "extends": "eslint:recommended",
     "rules": {
         "accessor-pairs": "error",
