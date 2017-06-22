@@ -1,39 +1,66 @@
 exports = typeof window === 'undefined' ? global : window;
 
 exports.functionsAnswers = {
-  argsAsArray: function(fn, arr) {
+    argsAsArray: function (fn, arr) {
+        return fn.apply(fn, arr);
+    },
 
-  },
+    speak: function (fn, obj) {
 
-  speak: function(fn, obj) {
+        return fn.call(obj);
+    },
 
-  },
+    functionFunction: function (str) {
 
-  functionFunction: function(str) {
+        return function (str2) {
+            return str + ", " + str2;
+        }
+    },
 
-  },
+    makeClosures: function (arr, fn) {
+        return arr.map(function (item) {
+            return (function (item) {
+                return function () {
+                    return fn(item);
+                }
+            })(item);
+        });
+    },
 
-  makeClosures: function(arr, fn) {
+    partial: function (fn, str1, str2) {
+        return function (str3) {
+            return fn(str1, str2, str3);
+        };
+    },
 
-  },
+    useArguments: function () {
 
-  partial: function(fn, str1, str2) {
+        var total = 0;
 
-  },
+        for (var i = 0; i < arguments.length; i++) {
+            total += arguments[i];
+        }
 
-  useArguments: function() {
+        return total;
+    },
 
-  },
+    callIt: function (fn) {
+        var args = Array.prototype.slice.call(arguments, 1, arguments.length);
+        fn.apply(null, args);
+    },
 
-  callIt: function(fn) {
+    partialUsingArguments: function (fn) {
 
-  },
+        var args = Array.prototype.slice.call(arguments, 1, arguments.length);
+        return function () {
+            var moreArgs = args.concat(Array.prototype.slice.call(arguments));
+            return fn.apply(null, moreArgs);
+        };
+    },
 
-  partialUsingArguments: function(fn) {
-
-  },
-
-  curryIt: function(fn) {
-
-  }
-};
+    curryIt: function (fn) {
+        function applyArguments(_fn, args) {
+            return _fn.apply(null, args);
+        }
+    },
+}
